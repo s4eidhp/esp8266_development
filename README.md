@@ -126,6 +126,20 @@ cd hello_world
 make menuconfig
 make flash
 make monitor        # prints logs and uart outputs
+
+# esptool is another way to flash the firmware
+esptool --chip esp8266 \
+        --port /dev/ttyUSB0 \
+        --baud 115200 \
+        --before default_reset \
+        --after hard_reset write_flash \
+        -z \
+        --flash_mode dio \
+        --flash_freq 40m \
+        --flash_size 2MB \
+        0x0 build/bootloader/bootloader.bin \
+        0x10000 build/hello-world.bin \
+        0x8000 build/partitions_singleapp.bin
 ```
 
 ## ToDo
