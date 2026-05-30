@@ -110,7 +110,7 @@ cd ~/esp8266
 python -m venv venv/
 source venv/bin/activate
 # change in $IDF_PATH/requirments.txt
-setuptools=80.9.0
+setuptools=80.8.0
 python -m pip install -r $IDF_PATH/requirments
 
 # permission issues resolve
