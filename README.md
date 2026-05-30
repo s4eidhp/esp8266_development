@@ -29,7 +29,6 @@ There is plenty of SDKs but the most important ones are:
 In this guide we deep dive into nonOS and RTOS SDKs.
 
 ### NonOS SDK
-
 1. Prepare Development Environment
 ```bash
 git clone https://github.com/espressif/ESP8266_NONOS_SDK.git
@@ -86,6 +85,48 @@ cd ~/uart_test
             0x3fc000 esp_init_data_default_v08.bin \
             0x3fe000 blank.bin
     ```
+### RTOS SDK
+1. Prepare Development Environment
+```bash
+# install required packages
+sudo apt install gcc git wget make libncurses-dev flex bison gperf
+
+# download toolchain
+mkdir -p ~/esp8266
+cd ~/esp8266
+wget https://dl.espressif.com/dl/xtensa-lx106-elf-gcc8_4_0-esp-2020r3-linux-amd64.tar.gz
+tar -xzf xtensa-lx106-elf-gcc8_4_0-esp-2020r3-linux-amd64.tar.gz
+rm xtensa-lx106-elf-gcc8_4_0-esp-2020r3-linux-amd64.tar.gz
+
+# get RTOS_SDK
+git clone --recursive https://github.com/espressif/ESP8266_RTOS_SDK.git
+
+# add to ~/.bashrc
+export PATH="$PATH:$HOME/esp8266/xtensa-lx106-elf/bin"
+export IDF_PATH="$HOME/esp8266/ESP8266_RTOS_SDK"
+
+# instll python pacakges
+cd ~/esp8266
+python -m venv venv/
+source venv/bin/activate
+# change in $IDF_PATH/requirments.txt
+setuptools=80.9.0
+python -m pip install -r $IDF_PATH/requirments
+
+# permission issues resolve
+sudo usermod -a -G dialout $USER
+sudo chmod -R 777 /dev/ttyUSB0
+```
+2. Create Project, Build and Flash
+```bash
+cd ~/esp8266
+source venv/bin/activate
+cp -r $IDF_PATH/examples/get-started/hello_world .
+cd hello_world
+make menuconfig
+make flash
+make monitor        # prints logs and uart outputs
+```
 
 ## ToDo
 - FOTA vs Non-FOTA development
