@@ -1,5 +1,5 @@
 # ESP8266 Development
-In this gist i want to sotre all related contents and documents which can help some one to start with ESP8266 development and deep dive into bits and registers. I also want to introduce different SDKs which can be used for programming and also bare-metal approach too.
+In this repo i want to sotre all related contents and documents which can help some one to start with ESP8266 development and deep dive into bits and registers. I also want to introduce different SDKs which can be used for programming and also bare-metal approach too.
 
 ## Specifications
 - Processor: L106 32-bit RISC microprocessor core based on the Tensilica Diamond Standard 106Micro running at 80 or 160 MHz
